@@ -16,7 +16,6 @@ car_counts = {
     "lane2": 0
 }
 
-# Variables to compute average cars per minute
 total_cars = 0
 start_time = time.time()
 
@@ -24,10 +23,8 @@ start_time = time.time()
 def get_state():
     global total_cars, start_time
 
-    # Calculate elapsed minutes
-    elapsed_minutes = max((time.time() - start_time) / 60, 1/60)  # avoid division by zero
+    elapsed_minutes = max((time.time() - start_time) / 60, 1/60) 
 
-    # Update total cars with latest counts
     total_cars = car_counts["lane1"] + car_counts["lane2"]
 
     average_per_minute = total_cars / elapsed_minutes
@@ -66,7 +63,7 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins for Android app
+CORS(app, resources={r"/*": {"origins": "*"}})  
 
 # Initial traffic light state
 traffic_state = {
@@ -108,5 +105,5 @@ def update_counts():
     return jsonify(car_counts)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # default to 5000 if not set
+    port = int(os.environ.get("PORT", 5000)) 
     app.run(host="0.0.0.0", port=port)
